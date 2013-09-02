@@ -1,0 +1,6 @@
+avisota-contao-nightly-*
+bin/
+composer/
+system/config/localconfig.php
+system/drivers/
+system/modules/

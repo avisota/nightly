@@ -1,0 +1,24 @@
+{
+    "name": "contao/core",
+    "version": "2.11.12",
+    "type": "metapackage",
+    "require": {
+        "avisota/contao": "dev-develop"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "cache-dir": "cache",
+        "preferred-install": "dist"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://legacy-packages-via.contao-community-alliance.org/"
+        },
+        {
+            "type": "vcs",
+            "url": "git@git.cyberspectrum.de:metamodels/dc_general.git"
+        }
+    ]
+}
