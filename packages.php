@@ -14,10 +14,21 @@ $buffer = <<<EOF
 
 EOF;
 foreach ($lock['packages'] as $package) {
+	$version = $package['version'];
+	
+	if (preg_match('#(^dev-|-dev$)#', $package['version'])) {
+		if (isset($package['source']['reference'])) {
+			$version .= '&nbsp;@&nbsp;' . substr($package['source']['reference'], 0, 6);
+		}
+		else if (isset($package['dist']['reference'])) {
+			$version .= '&nbsp;@&nbsp;' . substr($package['dist']['reference'], 0, 6);
+		}
+	}
+	
 	$buffer .= <<<EOF
 		<tr>
 			<td>{$package['name']}</td>
-			<td>{$package['version']}</td>
+			<td>{$version}</td>
 			<td>{$package['time']}</td>
 		</tr>
 
