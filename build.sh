@@ -5,7 +5,7 @@ cd $DIR
 DIR=$(pwd)
 
 # clean
-rm -rf avisota-contao-nightly-*.tar \
+rm -rf avisota-contao-nightly-* \
 	system/config/localconfig.php \
 	composer/cache \
 	composer/composer.lock \
@@ -48,3 +48,7 @@ zip -r -9 avisota-contao-nightly-$(date '+%Y-%m-%d').zip \
 	bin \
 	system/drivers \
 	system/modules
+
+# create packages overview
+php packages.php
+

@@ -1,4 +1,5 @@
 avisota-contao-nightly-*
+packages.html
 bin/
 composer/
 system/config/localconfig.php
