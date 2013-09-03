@@ -19,11 +19,11 @@ echo '<?php' > system/config/localconfig.php
 
 # update or install composer
 cd composer
-[ -f composer.phar ] && php composer.phar self-update
-[ ! -f composer.phar ] && curl -sS https://getcomposer.org/installer | php
+[ -f composer.phar ] && php composer.phar self-update || exit 1
+[ ! -f composer.phar ] && curl -sS https://getcomposer.org/installer | php || exit 1
 
 # install packages
-php composer.phar install
+php composer.phar install || exit 1
 
 # clean vcs
 find -mindepth 2 -name .git | while read GIT; do rm -rf "$GIT"; done
