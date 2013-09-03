@@ -2,7 +2,7 @@
 
 $lock = json_decode(file_get_contents('composer/composer.lock'), true);
 $buffer = <<<EOF
-<table class="table table-bordered">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Package</th>
@@ -21,16 +21,16 @@ foreach ($lock['packages'] as $package) {
 	else {
 		$url = false;
 	}
-	
+
 	if (preg_match('#^https?://#', $url)) {
 		$link = sprintf('<a href="%s" target="_blank">%s</a>', $url, $package['name']);
 	}
 	else {
 		$link = $package['name'];
 	}
-	
+
 	$version = $package['version'];
-	
+
 	if (preg_match('#(^dev-|-dev$)#', $package['version'])) {
 		if (isset($package['source']['reference'])) {
 			$version .= '&nbsp;@&nbsp;' . substr($package['source']['reference'], 0, 6);
@@ -39,10 +39,10 @@ foreach ($lock['packages'] as $package) {
 			$version .= '&nbsp;@&nbsp;' . substr($package['dist']['reference'], 0, 6);
 		}
 	}
-	
+
 	$time = $package['time'];
 	$license = implode(', ', $package['license']);
-	
+
 	$buffer .= <<<EOF
 		<tr>
 			<td>{$link}</td>
