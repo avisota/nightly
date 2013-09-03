@@ -8,12 +8,27 @@ $buffer = <<<EOF
 			<th>Package</th>
 			<th>Version</th>
 			<th>Time</th>
+			<th>License</th>
 		</tr>
 	</thead>
 	<tbody>
 
 EOF;
 foreach ($lock['packages'] as $package) {
+	if (isset($package['source'])) {
+		$url = preg_replace('#\.git$#', '', $package['source']['url']);
+	}
+	else {
+		$url = false;
+	}
+	
+	if (preg_match('#^https?://#', $url)) {
+		$link = sprintf('<a href="%s" target="_blank">%s</a>', $url, $package['name']);
+	}
+	else {
+		$link = $package['name'];
+	}
+	
 	$version = $package['version'];
 	
 	if (preg_match('#(^dev-|-dev$)#', $package['version'])) {
@@ -25,11 +40,15 @@ foreach ($lock['packages'] as $package) {
 		}
 	}
 	
+	$time = $package['time'];
+	$license = implode(', ', $package['license']);
+	
 	$buffer .= <<<EOF
 		<tr>
-			<td>{$package['name']}</td>
+			<td>{$link}</td>
 			<td>{$version}</td>
-			<td>{$package['time']}</td>
+			<td>{$time}</td>
+			<td>{$license}</td>
 		</tr>
 
 EOF;
